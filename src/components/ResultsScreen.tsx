@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Info, AlertTriangle } from 'lucide-react';
+import { Info } from 'lucide-react';
 import { useTranslation } from '../hooks/useTranslation';
 import { useTheme } from '../contexts/ThemeContext';
 import { useProfile } from '../contexts/ProfileContext';
 import Layout from './common/Layout';
-import { NutritionValues } from '../types';
+import WarningLabel from './common/WarningLabel';
+import SeasonalProduce from './common/SeasonalProduce';
+import { NutritionValues, AnalysisResults } from '../types';
 import { analyzeNutrition } from '../utils/nutritionCalculator';
 
 const ResultsScreen: React.FC = () => {
@@ -16,7 +18,7 @@ const ResultsScreen: React.FC = () => {
   
   // State to store nutrition values and analysis results
   const [scannedValues, setScannedValues] = useState<NutritionValues | null>(null);
-  const [analysisResults, setAnalysisResults] = useState<any | null>(null);
+  const [analysisResults, setAnalysisResults] = useState<AnalysisResults | null>(null);
   
   // Load data when component mounts
   useEffect(() => {
@@ -141,7 +143,7 @@ const ResultsScreen: React.FC = () => {
             {analysisResults.warnings.length > 0 && (
               <div className="mt-4 flex gap-2 flex-wrap justify-center">
                 {analysisResults.warnings.map((warning: string, index: number) => (
-                  <div key={index}>{renderWarningLabel(warning)}</div>
+                  <WarningLabel key={index} type={warning} />
                 ))}
               </div>
             )}
@@ -296,6 +298,18 @@ const ResultsScreen: React.FC = () => {
             </button>
           </div>
         </div>
+        
+        {/* Seasonal Produce Recommendations */}
+        {analysisResults.score < 60 && (
+          <div className="mt-4">
+            <div className={`${cardClass} rounded-xl p-3 mb-2`}>
+              <p className="text-sm font-medium mb-2">
+                {t('healthyAlternatives')}
+              </p>
+            </div>
+            <SeasonalProduce />
+          </div>
+        )}
       </div>
     </Layout>
   );

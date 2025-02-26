@@ -42,8 +42,19 @@ const translations = {
       active: "Very Active",
       athletic: "Athletic",
       dailyRecommendations: "Daily Recommended Values",
+      currentProfile: "Current Profile",
+      profileCombinationNote: "These values are specifically tailored to your unique combination of gender, age, and activity level.",
+      loading: "Loading...",
       
-      // Results Screen
+      // Seasonal Produce
+      seasonalProduce: "Seasonal Produce",
+      inSeason: "In season during",
+      fruits: "Fruits",
+      vegetables: "Vegetables",
+      winter: "Winter",
+      spring: "Spring",
+      summer: "Summer",
+      autumn: "Autumn",
       serving: "Serving",
       calories: "Calories",
       totalFat: "Total Fat",
@@ -116,8 +127,19 @@ const translations = {
       active: "Muy Activo",
       athletic: "Atlético",
       dailyRecommendations: "Valores Diarios Recomendados",
+      currentProfile: "Perfil Actual",
+      profileCombinationNote: "Estos valores están específicamente adaptados a tu combinación única de género, edad y nivel de actividad.",
+      loading: "Cargando...",
       
-      // Results Screen
+      // Seasonal Produce
+      seasonalProduce: "Productos de Temporada",
+      inSeason: "De temporada durante",
+      fruits: "Frutas",
+      vegetables: "Verduras",
+      winter: "Invierno",
+      spring: "Primavera",
+      summer: "Verano",
+      autumn: "Otoño",
       serving: "Porción",
       calories: "Calorías",
       totalFat: "Grasa Total",
@@ -190,8 +212,19 @@ const translations = {
       active: "Très Actif",
       athletic: "Athlétique",
       dailyRecommendations: "Valeurs Quotidiennes Recommandées",
+      currentProfile: "Profil Actuel",
+      profileCombinationNote: "Ces valeurs sont spécifiquement adaptées à votre combinaison unique de genre, d'âge et de niveau d'activité.",
+      loading: "Chargement...",
       
-      // Results Screen
+      // Seasonal Produce
+      seasonalProduce: "Produits de Saison",
+      inSeason: "De saison pendant",
+      fruits: "Fruits",
+      vegetables: "Légumes",
+      winter: "Hiver",
+      spring: "Printemps",
+      summer: "Été",
+      autumn: "Automne",
       serving: "Portion",
       calories: "Calories",
       totalFat: "Matières Grasses",

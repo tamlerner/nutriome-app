@@ -1,11 +1,11 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import { ProfileProvider } from './contexts/ProfileContext';
-import { ThemeProvider } from './contexts/ThemeContext';
-import ScannerScreen from './components/ScannerScreen';
-import ProfileScreen from './components/ProfileScreen';
-import ResultsScreen from './components/ResultsScreen';
-import NavBar from './components/common/NavBar';
+import { ProfileProvider } from '../contexts/ProfileContext';
+import { ThemeProvider } from '../contexts/ThemeContext';
+import ScannerScreen from './ScannerScreen';
+import ProfileScreen from './ProfileScreen';
+import ResultsScreen from './ResultsScreen';
+import NavBar from './common/NavBar';
 import './App.css';
 
 const App: React.FC = () => {

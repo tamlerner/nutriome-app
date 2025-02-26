@@ -29,46 +29,73 @@ interface AnalysisResults {
 const getThresholds = (profile: UserProfile) => {
   const { gender, age, activityLevel } = profile;
   
-  // Base thresholds for product evaluation (per 100g)
-  let thresholds = {
-    highSugar: 10,
-    highCarbs: 45,
-    lowFiber: 3,
-    poorCarbFiberRatio: 10
+  // Complete matrix of thresholds based on all combinations
+  // Format: [highSugar, highCarbs, lowFiber, poorCarbFiberRatio]
+  const thresholdMatrix = {
+    male: {
+      underAge: {
+        sedentary: [6, 38, 3.5, 8],      // Young males need less sugar, especially if sedentary
+        moderate: [8, 43, 3, 9],
+        active: [10, 51, 3, 10],
+        athletic: [12, 58, 3, 11]        // Athletic youth can tolerate more carbs
+      },
+      young: {
+        sedentary: [8, 40, 3, 8],
+        moderate: [10, 45, 3, 9],
+        active: [12, 53, 3, 10],
+        athletic: [14, 60, 3, 11]
+      },
+      middle: {
+        sedentary: [7, 38, 3, 8],
+        moderate: [9, 43, 3, 9],
+        active: [11, 51, 3, 10],
+        athletic: [13, 58, 3, 10]
+      },
+      older: {
+        sedentary: [5, 35, 3.5, 7],      // Older people need stricter thresholds
+        moderate: [7, 40, 3.5, 8],
+        active: [9, 48, 3, 8],
+        athletic: [11, 55, 3, 9]
+      }
+    },
+    female: {
+      underAge: {
+        sedentary: [5, 35, 3.5, 8],
+        moderate: [7, 40, 3, 9],
+        active: [9, 48, 3, 9],
+        athletic: [11, 55, 3, 10]
+      },
+      young: {
+        sedentary: [7, 37, 3, 8],
+        moderate: [9, 42, 3, 9],
+        active: [11, 50, 3, 9],
+        athletic: [13, 57, 3, 10]
+      },
+      middle: {
+        sedentary: [6, 35, 3, 8],
+        moderate: [8, 40, 3, 9],
+        active: [10, 48, 3, 9],
+        athletic: [12, 55, 3, 9]
+      },
+      older: {
+        sedentary: [4, 32, 3.5, 6],      // Older women need the strictest thresholds
+        moderate: [6, 37, 3.5, 7],
+        active: [8, 45, 3, 8],
+        athletic: [10, 52, 3, 8]
+      }
+    }
   };
   
-  // Gender adjustments
-  if (gender === 'male') {
-    thresholds.highSugar += 2;
-    thresholds.highCarbs += 5;
-  }
+  // Get the specific thresholds for this exact profile combination
+  const specificThreshold = thresholdMatrix[gender][age][activityLevel];
   
-  // Age adjustments
-  if (age === 'underAge') {
-    thresholds.highSugar -= 4;
-    thresholds.highCarbs -= 2;
-  } else if (age === 'older') {
-    thresholds.highSugar -= 3;
-    thresholds.highCarbs -= 5;
-    thresholds.poorCarbFiberRatio -= 2;
-  } else if (age === 'middle') {
-    thresholds.highSugar -= 1;
-    thresholds.highCarbs -= 2;
-  }
-  
-  // Activity level adjustments
-  if (activityLevel === 'sedentary') {
-    thresholds.highSugar -= 2;
-    thresholds.highCarbs -= 5;
-  } else if (activityLevel === 'active') {
-    thresholds.highSugar += 2;
-    thresholds.highCarbs += 8;
-  } else if (activityLevel === 'athletic') {
-    thresholds.highSugar += 4;
-    thresholds.highCarbs += 15;
-  }
-  
-  return thresholds;
+  // Create the thresholds object
+  return {
+    highSugar: specificThreshold[0],
+    highCarbs: specificThreshold[1],
+    lowFiber: specificThreshold[2],
+    poorCarbFiberRatio: specificThreshold[3]
+  };
 };
 
 // Analyze nutrition data

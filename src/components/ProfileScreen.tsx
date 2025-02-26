@@ -2,6 +2,7 @@ import React from 'react';
 import { useProfile } from '../contexts/ProfileContext';
 import { useTranslation } from '../hooks/useTranslation';
 import Layout from './common/Layout';
+import SeasonalProduce from './common/SeasonalProduce';
 
 const ProfileScreen: React.FC = () => {
   const { profile, updateProfile, getDailyRecommendations } = useProfile();
@@ -141,6 +142,23 @@ const ProfileScreen: React.FC = () => {
         {/* Daily Recommendations Based on Profile */}
         <div className="bg-blue-50 p-4 rounded-lg">
           <h3 className="font-medium mb-2">{t('dailyRecommendations')}</h3>
+          
+          {/* Current profile summary */}
+          <div className="mb-3 p-2 bg-white rounded">
+            <p className="text-sm font-medium text-blue-800">{t('currentProfile')}:</p>
+            <div className="flex flex-wrap gap-1 mt-1">
+              <span className="bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded">
+                {t(gender)}
+              </span>
+              <span className="bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded">
+                {t(age)}
+              </span>
+              <span className="bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded">
+                {t(activityLevel)}
+              </span>
+            </div>
+          </div>
+          
           <div className="space-y-2">
             <div className="flex justify-between">
               <span>{t('calories')}:</span>
@@ -163,6 +181,16 @@ const ProfileScreen: React.FC = () => {
               <span className="font-medium">{recommendations.fat}g</span>
             </div>
           </div>
+          
+          {/* Explanation about combined factors */}
+          <p className="mt-4 text-xs text-gray-600 italic">
+            {t('profileCombinationNote')}
+          </p>
+        </div>
+        
+        {/* Seasonal Produce Section */}
+        <div className="mt-6">
+          <SeasonalProduce />
         </div>
       </div>
     </Layout>

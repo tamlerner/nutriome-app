@@ -1,25 +1,37 @@
-import { useTheme } from '../contexts/ThemeContext';
-import translations from '../utils/translations';
+import { useState } from 'react';
 
-interface UseTranslationReturn {
-  t: (key: string) => string;
-  currentLanguage: string;
-}
-
-export const useTranslation = (): UseTranslationReturn => {
-  const { language } = useTheme();
-  
-  // Translate a key
-  const t = (key: string): string => {
-    // Get the translations for the current language
-    const currentTranslations = translations[language];
-    
-    // Return the translation or the key if not found
-    return currentTranslations[key] || key;
-  };
-  
-  return {
-    t,
-    currentLanguage: language
-  };
+const translations = {
+  en: {
+    scan: 'Scan',
+    results: 'Results',
+    profile: 'Profile',
+    scannerTitle: 'Nutrition Scanner',
+    readyToScan: 'Ready to scan',
+    scanButton: 'Scan Label',
+    captureButton: 'Capture',
+    cancelButton: 'Cancel',
+    liveScanningOn: 'Live Scanning On',
+    liveScanningOff: 'Live Scanning Off',
+    scanningLive: 'Scanning...',
+    pointCamera: 'Point camera at nutrition label',
+    scanInstructions: 'Position the nutrition facts label within the frame',
+    scanningTips: 'Scanning Tips',
+    tip1: 'Good lighting',
+    tip2: 'Hold steady',
+    tip3: 'Align label',
+    tip4: 'Clear view'
+  }
 };
+
+type Language = keyof typeof translations;
+type TranslationKey = keyof typeof translations.en;
+
+export const useTranslation = () => {
+  const [language, setLanguage] = useState<Language>('en');
+
+  const t = (key: TranslationKey): string => {
+    return translations[language][key] || key;
+  };
+
+  return { t, setLanguage, language };
+}; 

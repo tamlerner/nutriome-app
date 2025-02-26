@@ -12,6 +12,7 @@
   "dependencies": {
     "@types/react-router-dom": "^5.3.3",
     "autoprefixer": "^10.4.20",
+    "expo": "^52.0.37",
     "lucide-react": "^0.476.0",
     "postcss": "^8.5.3",
     "react": "^19.0.0",
