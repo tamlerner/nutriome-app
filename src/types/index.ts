@@ -1,9 +1,11 @@
+// User profile types
 export interface UserProfile {
     gender: 'male' | 'female';
     age: 'underAge' | 'young' | 'middle' | 'older';
     activityLevel: 'sedentary' | 'moderate' | 'active' | 'athletic';
   }
   
+  // Nutrition values from label
   export interface NutritionValues {
     productName: string;
     servingSize: string;
@@ -18,6 +20,16 @@ export interface UserProfile {
     sodium: number;
   }
   
+  // Daily recommended values
+  export interface DailyRecommendations {
+    calories: number;
+    carbs: number;
+    sugars: number;
+    protein: number;
+    fat: number;
+  }
+  
+  // Analysis results
   export interface AnalysisResults {
     score: number;
     grade: string;
@@ -30,7 +42,7 @@ export interface UserProfile {
     recommendations: {
       servingsToReachCarbLimit: number;
       servingsToReachSugarLimit: number;
-      dailyValues: Record<string, number>;
+      dailyValues: DailyRecommendations;
       percentOfDaily: Record<string, number>;
     };
   }
